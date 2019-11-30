@@ -111,39 +111,49 @@ Accuracy on test data is: 82.51
 # Define the model
 model = Sequential()
 
-model.add(SeparableConv2D(32, kernel_size=(3, 3),  border_mode='same', activation='relu', input_shape=(32, 32, 3)))
+model.add(SeparableConv2D(32, kernel_size=(3, 3),  border_mode='same', activation='relu', input_shape=(32, 32, 3)))  # out=32, RF=3
 model.add(BatchNormalization())
 
-model.add(SeparableConv2D(64, kernel_size=(3, 3),  border_mode='same', activation='relu'))
+model.add(SeparableConv2D(64, kernel_size=(3, 3),  border_mode='same', activation='relu')) #out=32, RF=5
 model.add(BatchNormalization())
 
-model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(MaxPooling2D(pool_size=(2, 2))) #out=16,RF=6
 model.add(Dropout(0.3))
 
-model.add(SeparableConv2D(64, kernel_size=(3, 3),  border_mode='same', activation='relu'))
+model.add(SeparableConv2D(64, kernel_size=(3, 3),  border_mode='same', activation='relu')) #out=16,RF=10
 model.add(BatchNormalization())
 
-model.add(SeparableConv2D(64, kernel_size=(3, 3),  border_mode='same', activation='relu'))
+model.add(SeparableConv2D(64, kernel_size=(3, 3),  border_mode='same', activation='relu')) #out=16,RF=14
 model.add(BatchNormalization())
 
-model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(MaxPooling2D(pool_size=(2, 2))) #out=8,RF=16
 model.add(Dropout(0.3))
 
-model.add(SeparableConv2D(128, kernel_size=(3, 3),  border_mode='same', activation='relu'))
+model.add(SeparableConv2D(128, kernel_size=(3, 3),  border_mode='same', activation='relu')) # out=8,RF=24
 model.add(BatchNormalization())
 
-model.add(SeparableConv2D(256, kernel_size=(3, 3),  border_mode='same', activation='relu'))
+model.add(SeparableConv2D(256, kernel_size=(3, 3),  border_mode='same', activation='relu')) #out=8,RF=32
 model.add(BatchNormalization())
 
-model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(MaxPooling2D(pool_size=(2, 2))) #out=4,RF=36
 model.add(Dropout(0.3))
 
 model.add(Flatten())
 
+#model.add(Dense(512))
+#model.add(Activation('relu'))
+#model.add(Dropout(0.5))
+
+#model.add(Dense(256))
+#model.add(Activation('relu'))
+#model.add(Dropout(0.5))
 
 model.add(Dense(num_classes, activation='softmax'))
 # Compile the model
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+
+
 
 
 3. Accuracy = 82.57% at 47th epoch
